@@ -69,23 +69,23 @@ whisk:
     guest: "23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP"
   systemNameSpace: "/whisk.system"
   limits:
-    actionsInvokesPerminute: 60
-    actionsInvokesConcurrent: 30
-    triggersFiresPerminute: 60
-    actionsSequenceMaxlength: 50
+    actionsInvokesPerminute: 6000000
+    actionsInvokesConcurrent: 3000000
+    triggersFiresPerminute: 6000000
+    actionsSequenceMaxlength: 500000
     actions:
       time:
         min: "100ms"
         max: "5m"
         std: "1m"
       memory:
-        min: "128m"
-        max: "512m"
+        min: "256m"
+        max: "256m"
         std: "256m"
       concurrency:
-        min: 1
-        max: 1
-        std: 1
+        min: 100000
+        max: 100000
+        std: 100000
       log:
         min: "0m"
         max: "10m"
@@ -121,7 +121,7 @@ whisk:
         retentionBytes: ""
         retentionMs: ""
   containerPool:
-    userMemory: "2048m"
+    userMemory: "2800m"
   runtimes: "runtimes.json"
   testing:
     includeTests: true
@@ -259,7 +259,7 @@ invoker:
   containerFactory:
     useRunc: false
     impl: "kubernetes"
-    enableConcurrency: false
+    enableConcurrency: true
     networkConfig:
       name: "bridge"
       dns:
@@ -271,8 +271,8 @@ invoker:
           search: ""
           options: ""
     kubernetes:
-      isolateUserActions: true
-      replicaCount: 1
+      isolateUserActions: false
+      replicaCount: 3
 
 # API Gateway configurations
 apigw:
@@ -346,7 +346,7 @@ metrics:
   # set true to enable Kamon tags
   kamonTags: false
   # set true to enable user metrics
-  userMetricsEnabled: false
+  userMetricsEnabled: true
 
 # Configuration of OpenWhisk event providers
 providers:
