@@ -69,10 +69,10 @@ whisk:
     guest: "23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP"
   systemNameSpace: "/whisk.system"
   limits:
-    actionsInvokesPerminute: 6000000
-    actionsInvokesConcurrent: 3000000
-    triggersFiresPerminute: 6000000
-    actionsSequenceMaxlength: 500000
+    actionsInvokesPerminute: 600000
+    actionsInvokesConcurrent: 30000
+    triggersFiresPerminute: 600000
+    actionsSequenceMaxlength: 5000
     actions:
       time:
         min: "100ms"
@@ -83,9 +83,9 @@ whisk:
         max: "256m"
         std: "256m"
       concurrency:
-        min: 100000
-        max: 100000
-        std: 100000
+        min: 10000
+        max: 10000
+        std: 10000
       log:
         min: "0m"
         max: "10m"
@@ -259,7 +259,7 @@ invoker:
   containerFactory:
     useRunc: false
     impl: "kubernetes"
-    enableConcurrency: true
+    enableConcurrency: false
     networkConfig:
       name: "bridge"
       dns:
